@@ -7,7 +7,7 @@ import (
     "io/ioutil"
     "log"
     "net/http"
-    "appengine"
+    // "appengine"
 )
 
 const (
@@ -29,7 +29,7 @@ func init() {
     http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
         w.Write(Data)
         // logging
-        c := appengine.NewContext(r)
-        c.Infof("okaq.funka: hello %s", r.RemoteAddr)
+        // c := appengine.NewContext(r)
+        // c.Infof("okaq.funka: hello %s", r.RemoteAddr)
     })
 }
