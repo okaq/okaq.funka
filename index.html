@@ -9,25 +9,37 @@
             html,body{width:1920px;height:1080px;background-color:rgba(254,254,254,1.0);}
         </style>
         <script type="text/javascript">
-            // ok
-        console.log("ok funka");
-        // async_load
-        (function() {
-            var async_load = function() {
-                g.init();
-                }
-                var click_handler = function(e) {
-                    console.log(e)
-                    window.location = "http://okaq.github.io/";
-                }
-                window.addEventListener("load", async_load, false);
-                window.addEventListener("click", click_handler, false);
-                })();
+// ok
+console.log("ok funka");
+// async_load
+(function() {
+    // async loader
+    var async_load = function() {
+         g.init();
+    }
+    // click event handler
+    var click_handler = function(e) {
+         console.log(e)
+         window.location = "http://okaq.github.io/";
+    }
+    // custom "kippi" event
+    kippi = new Event("kippi");
+    // "kippi" event handler
+    var kippi_handler = function(e) {
+        console.log(e);
+    }
+    // event registration
+    window.addEventListener("load", async_load, false);
+    window.addEventListener("click", click_handler, false);
+    window.addEventListener("kippi", kippi_handler, false);
+})();
 // game
 var g = {
     "init": function() {
         console.log("Well I'm looping");
         lay.init();
+        // dispatch kippi event
+        window.dispatchEvent(kippi);
     }
 }
 // layout
