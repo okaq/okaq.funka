@@ -16,17 +16,31 @@
             var async_load = function() {
                 g.init();
                 }
+                var click_handler = function(e) {
+                    console.log(e)
+                    window.location = "http://okaq.github.io/";
+                }
                 window.addEventListener("load", async_load, false);
+                window.addEventListener("click", click_handler, false);
                 })();
 // game
 var g = {
     "init": function() {
         console.log("Well I'm looping");
+        lay.init();
+    }
+}
+// layout
+var lay = {
+    "init": function() {
+        lay.alpha = document.getElementById("alpha");
+        lay.beta = document.createElement("canvas");
+        console.log(lay.beta);
     }
 }
         </script>
     </head>
-    <body>
+    <body id= "alpha">
         <h1>KITE KITE KITE KITE SKY SKY SKY SKY</h1>
         <h2>CLOUD CLOUD SEA SEA SEA CLOUD CLOUD</h2>
         <h3>SAND SHELLS SAND SHELLS SAND SHELLS SAND</h3>
