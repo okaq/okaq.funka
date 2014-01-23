@@ -28,6 +28,11 @@ console.log("ok funka");
     var kippi_handler = function(e) {
         console.log(e);
     }
+    // liyyu event handler
+    window.liyyu_handler = function(e) {
+        console.log("window liyyu!");
+        console.log(e);
+    }
     // event registration
     window.addEventListener("load", async_load, false);
     window.addEventListener("click", click_handler, false);
@@ -37,9 +42,17 @@ console.log("ok funka");
 var g = {
     "init": function() {
         console.log("Well I'm looping");
-        lay.init();
         // dispatch kippi event
         window.dispatchEvent(kippi);
+        // custom liyyu event
+        g.liyyu = new Event("liyyu");
+        // liyyu event handler
+        g.liyyu_handler = function(e) {
+            console.log("g.liyyu!");
+            console.log(e);
+        }
+
+        lay.init();
     }
 }
 // layout
@@ -48,6 +61,21 @@ var lay = {
         lay.alpha = document.getElementById("alpha");
         lay.beta = document.createElement("canvas");
         console.log(lay.beta);
+        // dispatch kippi event
+        window.dispatchEvent(kippi);
+        // custom moppu event
+        lay.moppu = new Event("moppu");
+        // moppu event handler
+        lay.moppu_handler = function(e) {
+            console.log("lay.moppu!");
+            console.log(e);
+        }
+        lay.beta.addEventListener("moppu", lay.moppu_handler, false);
+        lay.beta.addEventListener("liyyu", g.liyyu_handler, false);
+        lay.beta.dispatchEvent(lay.moppu);
+        lay.beta.dispatchEvent(g.liyyu);
+        window.addEventListener("liyyu", window.liyyu_handler, false);
+        window.dispatchEvent(g.liyyu);
     }
 }
         </script>
