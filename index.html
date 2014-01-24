@@ -7,6 +7,8 @@
         <link rel="shortcut icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAAMElEQVR4nOzNQREAMAzDsN2u/MEGQUk0PxmANUles1+9AwAAAAAAAAAAgMM2AAD//xOwAxmXfDROAAAAAElFTkSuQmCC" />
         <style type="text/css">
             html,body{width:1920px;height:1080px;background-color:rgba(254,254,254,1.0);}
+            .gamma{position:absolute;top:0px;left:0px;}
+            .delta{position:absolute;top:256px;left:0px;}
         </style>
         <script type="text/javascript">
 // ok
@@ -53,12 +55,20 @@ var g = {
         }
 
         lay.init();
+        render.draw();
     }
 }
 // layout
 var lay = {
     "init": function() {
         lay.alpha = document.getElementById("alpha");
+        lay.gamma = document.getElementById("gamma");
+        lay.delta = document.getElementById("delta");
+        lay.con = [];
+        lay.con[0] = lay.gamma.getContext("2d");
+        lay.con[1] = lay.delta.getContext("2d");
+    },
+    "msg": function() {
         lay.beta = document.createElement("canvas");
         console.log(lay.beta);
         // dispatch kippi event
@@ -78,11 +88,38 @@ var lay = {
         window.dispatchEvent(g.liyyu);
     }
 }
+// render
+var render = {
+    "draw": function() {
+        var m = 16;
+        for (var i = 0; i < lay.con.length; i++) {
+            lay.con[i].fillStyle = c.rc();
+            lay.con[i].fillRect(m,m,m*m,m*m);
+        }
+    }
+}
+// color
+var c = {
+    "rc": function() {
+        var c0 = [c.rb(),c.rb(),c.rb(),1.0];
+        var s0 = c0.join(",");
+        var s1 = "rgba(" + s0 + ")";
+        return s1;
+    },
+    "rb": function() {
+        var b0 = ((Math.random() * 255) >>> 0);
+        return b0;
+    }
+}
         </script>
     </head>
     <body id= "alpha">
+        <canvas id="gamma" width="512" height="256"></canvas>
+        <canvas id="delta" width="512" height="512"></canvas>
+        <!--
         <h1>KITE KITE KITE KITE SKY SKY SKY SKY</h1>
         <h2>CLOUD CLOUD SEA SEA SEA CLOUD CLOUD</h2>
         <h3>SAND SHELLS SAND SHELLS SAND SHELLS SAND</h3>
+        -->
     </body>
 </html>
