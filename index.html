@@ -69,6 +69,7 @@ var lay = {
         lay.con = [];
         lay.con[0] = lay.gamma.getContext("2d");
         lay.con[1] = lay.delta.getContext("2d");
+        lay.quad();
     },
     "msg": function() {
         lay.beta = document.createElement("canvas");
@@ -88,14 +89,17 @@ var lay = {
         lay.beta.dispatchEvent(g.liyyu);
         window.addEventListener("liyyu", window.liyyu_handler, false);
         window.dispatchEvent(g.liyyu);
+    },
+    "quad": function() {
+        lay.quads = [];
     }
 }
 // render
 var render = {
     "draw": function() {
-        var m = 16;
+        var m = 64;
         lay.con[1].fillStyle = c.rc();
-        lay.con[1].fillRect(m,m,m*m,m*m);
+        lay.con[1].fillRect(m,m,lay.delta.width-2*m,lay.delta.height-2*m);
         var w0 = (lay.gamma.width / 4) >>> 0;
         var h0 = (lay.gamma.height);
         /* 4chars, in 512x256 scale
@@ -174,8 +178,8 @@ var logo_json =
         </script>
     </head>
     <body id= "alpha">
-        <canvas id="gamma" width="512" height="512"></canvas>
-        <canvas id="delta" width="512" height="512"></canvas>
+        <canvas id="gamma" width="896" height="896"></canvas>
+        <canvas id="delta" width="768" height="768"></canvas>
         <!--
         <h1>KITE KITE KITE KITE SKY SKY SKY SKY</h1>
         <h2>CLOUD CLOUD SEA SEA SEA CLOUD CLOUD</h2>
