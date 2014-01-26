@@ -7,8 +7,10 @@
         <link rel="shortcut icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAAMElEQVR4nOzNQREAMAzDsN2u/MEGQUk0PxmANUles1+9AwAAAAAAAAAAgMM2AAD//xOwAxmXfDROAAAAAElFTkSuQmCC" />
         <style type="text/css">
             html,body{width:1920px;height:1080px;background-color:rgba(254,254,254,1.0);}
+            /*
             #gamma{position:absolute;top:0px;left:0px;}
             #delta{position:absolute;top:256px;left:0px;}
+            */
         </style>
         <script type="text/javascript">
 // ok
@@ -92,9 +94,63 @@ var lay = {
 var render = {
     "draw": function() {
         var m = 16;
-        for (var i = 0; i < lay.con.length; i++) {
-            lay.con[i].fillStyle = c.rc();
-            lay.con[i].fillRect(m,m,m*m,m*m);
+        lay.con[1].fillStyle = c.rc();
+        lay.con[1].fillRect(m,m,m*m,m*m);
+        var w0 = (lay.gamma.width / 4) >>> 0;
+        var h0 = (lay.gamma.height);
+        /* 4chars, in 512x256 scale
+        for (var i = 0; i < 4; i++) {
+            lay.con[0].fillStyle = c.rc();
+            var x0 = i * w0;
+            var y0 = 0;
+            lay.con[0].fillRect(x0,y0,w0,h0);
+            var c0 = c.rc();
+            var w1 = (w0 / 4) >>> 0;
+            var h1 = (h0 / 4) >>> 0;
+            for (var j = 0; j < 16; j++) {
+                var row0 = (j / 4) >>> 0;
+                var col0 = j % 4;
+                var m0 = 2;
+                var x1 = col0 * w1;
+                var y1 = row0 * h1;
+                var i0 = 0;
+                var c0;
+                var c1 = c.rc()
+                if (logo_json[i0]) {
+                    lay.con[0].fillStyle = c0;    
+                } else {
+                    lay.con[0].fillStyle = "rgba(255,255,255,1.0)";
+                }
+                lay.con[0].fillRect(x1+m0,y1+m0,w1-2*m0,h1-2*m0);
+            }
+            }
+         */
+        render.logo();
+    },
+    "logo": function() {
+        var c0 = 0;
+        var c1 = 0;
+        for (var v in logo_json) {
+            // console.log(logo_json[v][0])
+            if (logo_json[v][0] == "true") {
+                c0 = c0 + 1;
+                c1 = c1 + 1;
+            } else {
+                c0 = c0 + 1;
+            }
+        }
+        // console.log(c0,c1);
+        var nx = Math.sqrt(c0) >>> 0;
+        lay.con[0].fillStyle = c.rc();
+        var w0 = (lay.gamma.width / nx) >>> 0;
+        var h0 = (lay.gamma.height / nx) >>> 0;
+        for (var v in logo_json) {
+            var x0 = (v % nx) * w0;
+            // console.log("render.logo x0: " + x0);
+            var y0 = ((v / nx) >>> 0) * w0;
+            if (logo_json[v] == "true") {
+                lay.con[0].fillRect(x0,y0,w0,h0);
+            }
         }
     }
 }
@@ -111,10 +167,14 @@ var c = {
         return b0;
     }
 }
+// logo
+// created @ okaq.unaki
+var logo_json =
+{"0":["false"],"1":["false"],"10":["true"],"11":["false"],"12":["true"],"13":["true"],"14":["true"],"15":["true"],"16":["true"],"17":["true"],"18":["false"],"19":["false"],"2":["false"],"20":["true"],"21":["false"],"22":["true"],"23":["true"],"24":["false"],"25":["false"],"26":["true"],"27":["false"],"28":["true"],"29":["true"],"3":["true"],"30":["true"],"31":["false"],"32":["false"],"33":["false"],"34":["false"],"35":["true"],"36":["false"],"37":["false"],"38":["false"],"39":["true"],"4":["true"],"40":["true"],"41":["false"],"42":["false"],"43":["true"],"44":["false"],"45":["false"],"46":["true"],"47":["false"],"48":["false"],"49":["false"],"5":["false"],"50":["true"],"51":["true"],"52":["false"],"53":["false"],"54":["false"],"55":["true"],"56":["false"],"57":["true"],"58":["false"],"59":["false"],"6":["false"],"60":["false"],"61":["false"],"62":["true"],"63":["false"],"7":["true"],"8":["true"],"9":["true"]};
         </script>
     </head>
     <body id= "alpha">
-        <canvas id="gamma" width="512" height="256"></canvas>
+        <canvas id="gamma" width="512" height="512"></canvas>
         <canvas id="delta" width="512" height="512"></canvas>
         <!--
         <h1>KITE KITE KITE KITE SKY SKY SKY SKY</h1>
