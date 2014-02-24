@@ -11,7 +11,8 @@ import (
 )
 
 const (
-    PATH = "index.html"
+    // PATH = "index.html"
+    PATH = "anaova.html"
 )
 
 var (
