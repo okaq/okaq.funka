@@ -5,6 +5,96 @@
         <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
         <meta name="viewport" content="width=1920,height=1080,initial-scale=1" />
         <link rel="shortcut icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAAMklEQVR4nGLZx3CCgZaAiaamj1owasGoBaMWjFowasGoBaMWjFowasGoBVQEgAAAAP//K1YByejktyMAAAAASUVORK5CYII=" />
+        <style type="text/css">
+            html,body{width:1920px;height:1080px;background-color:rgba(255,255,255,1.0);}
+        </style>
+        <script type="text/javascript">
+            // ok
+        console.log("ok anaova!");
+        // async load
+        (function() {
+         var async_loader = function() {
+            g.init();
+            }
+            window.addEventListener("load", async_loader, false);
+            })();
+// game
+var g = {
+    "init": function() {
+        console.log("game init");
+        this.N = 4;
+        this.rowCount = 6;
+        this.colCount = 7;
+        this.grid = []; // list of cols
+        for (var col = 0; col < this.colCount; col++) {
+            this.grid[col] = [];
+            for (var row = 0; row < this.rowCount; row++) {
+                this.grid[col][row] = 0;
+            }
+        }
+    },
+    "drop": function() {
+        // drop random coin
+    }
+}
+
+// renderer
+var render = {
+    "draw": function() {
+        // draw board
+        // draw cells
+        // draw coins
+    }
+}
+/*
+// connectN
+// i X j grid struct
+// row, col indicies
+var grid = {
+    "init": function() {
+        this.N = 4; // connect N
+        this.rc = 6; // row count
+        this.cc = 7; // col count
+        this.tot = this.rc * this.cc;
+        this.nodes = [];
+        for (var row = 0; row < this.rc; row++) {
+            for (var col = 0; col < this.cc; col++) {
+                var n0 = new node();
+                n0.row = row;
+                n0.col = col;
+                this.nodes.push(n0);
+            }
+        }
+    }
+}
+// node class
+var node = function() {
+    this.row = 0; // row index
+    this.col = 0; // col index
+    this.bit = false; // data (red,black)
+}
+// graph structure
+// defined by V,E
+// connectivity of red/black coins
+// update per move
+// check goalstate
+// blazingly fast, overkill
+
+// vertex class
+var vertex = {
+    this.row = 0; // row index
+    this.col = 0; // col index
+    this.index = 0; // array index
+    this.data = 0; // empty,black,red
+    this.edges = new edge();
+}
+
+// edge class
+var edge = {
+    this.vertices = [];
+    }
+*/    
+        </script>
     </head>
     <body>
     </body>

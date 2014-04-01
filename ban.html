@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head id="zeta">
+        <title>okaq</title>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+        <meta name="viewport" content="width=1920,height=1080,initial-scale=1" />
+        <link rel="shortcut icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAAMklEQVR4nGLZx3CCgZaAiaamj1owasGoBaMWjFowasGoBaMWjFowasGoBVQEgAAAAP//K1YByejktyMAAAAASUVORK5CYII=" />
+        <style type="text/css">
+            html,body{width:1920px;height:1080px;background-color:rgba(255,255,255,1.0);}
+        </style>
+        <script type="text/javascript">
+            // ok
+        console.log("ok ban!");
+        // async load
+        (function() {
+         var async_loader = function() {
+            g.init();
+            }
+            window.addEventListener("load", async_loader, false);
+            })();
+// game
+var g = {
+    "init": function() {
+        console.log("game init");
+        g.X = 11;
+        g.Y = 11;
+        d.init();
+        b.init();
+        r.draw();
+    }
+}
+// dom
+var d = {
+    "init": function() {
+        d.alpha = {};
+        d.alpha.body = document.getElementById("alpha");
+        d.beta = {};
+        d.beta.W = 1024;
+        d.beta.H = 1024;
+        d.beta.can = document.createElement("canvas");
+        d.beta.con = d.beta.can.getContext("2d");
+        d.beta.can.width = d.beta.W;
+        d.beta.can.height = d.beta.H;
+        d.beta.can.style.position = "absolute";
+        d.beta.can.style.top = "32px";
+        d.beta.can.style.left = "32px";
+        d.alpha.body.appendChild(d.beta.can);
+    },
+    "add": function(w,h,t,l) {
+        // create canvas
+    }
+}
+// board
+var b = {
+    "init": function() {
+        console.trace(b);
+        b.data = new Array(g.X*g.Y);
+        for (var i = 0; i < b.data.length; i++) {
+            b.data[i] = 0;
+        }
+    }
+}
+// render
+var r = {
+    "draw": function() {
+        var x0 = (d.beta.can.width / g.X) >>> 0;
+        var y0 = (d.beta.can.height / g.Y) >>> 0;
+        var m0 = 2;
+        for (var y = 0; y < g.Y; y++) {
+            for (var x = 0; x < g.X; x++) {
+                d.beta.con.fillStyle = c.rand(); "rgba(128,128,128,1.0)";
+                d.beta.con.fillRect(x * x0 + m0, y * y0 + m0, x0 - 2 * m0, y0 - 2 * m0);
+            }
+        }
+    }
+}
+// color
+var c = {
+    "rand": function(a1) {
+        var r0 = c.rb();
+        var g0 = c.rb();
+        var b0 = c.rb();
+        var a0 = a1 || Math.random();
+        var c0 = [r0,g0,b0,a0];
+        var c1 = c0.join(",");
+        var s0 = "rgba(" + c1 + ")";
+
+        return s0;
+    },
+    "rb": function() {
+        var r0 = (Math.random() * 255) >>> 0;
+
+        return r0;
+    }
+}
+// board == collection of squares
+// square == canvas, data, handlers
+// game == observers to ui events, gamestate, logic
+// squares indexed by row,col
+</script>
+</head>
+<body id="alpha">
+</body>
+</html>

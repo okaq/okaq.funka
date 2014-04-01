@@ -12,7 +12,8 @@ import (
 
 const (
     // PATH = "index.html"
-    PATH = "anaova.html"
+    // PATH = "anaova.html"
+    PATH = "ban.html"
 )
 
 var (
