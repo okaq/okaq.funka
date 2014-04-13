@@ -35,15 +35,15 @@ var d = {
         d.alpha = {};
         d.alpha.body = document.getElementById("alpha");
         d.beta = {};
-        d.beta.W = 1024;
-        d.beta.H = 1024;
+        d.beta.W = (1920-256);
+        d.beta.H = (1080-256);
         d.beta.can = document.createElement("canvas");
         d.beta.con = d.beta.can.getContext("2d");
         d.beta.can.width = d.beta.W;
         d.beta.can.height = d.beta.H;
         d.beta.can.style.position = "absolute";
-        d.beta.can.style.top = "32px";
-        d.beta.can.style.left = "32px";
+        d.beta.can.style.top = "64px";
+        d.beta.can.style.left = "64px";
         d.alpha.body.appendChild(d.beta.can);
     },
     "add": function(w,h,t,l) {
@@ -65,10 +65,11 @@ var r = {
     "draw": function() {
         var x0 = (d.beta.can.width / g.X) >>> 0;
         var y0 = (d.beta.can.height / g.Y) >>> 0;
-        var m0 = 2;
+        var x0 = y0;
+        var m0 = 8;
         for (var y = 0; y < g.Y; y++) {
             for (var x = 0; x < g.X; x++) {
-                d.beta.con.fillStyle = c.rand(); "rgba(128,128,128,1.0)";
+                d.beta.con.fillStyle = c.rand(); // "rgba(128,128,128,1.0)";
                 d.beta.con.fillRect(x * x0 + m0, y * y0 + m0, x0 - 2 * m0, y0 - 2 * m0);
             }
         }

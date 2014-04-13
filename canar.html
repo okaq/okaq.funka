@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head id="zeta">
+        <title>okaq</title>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+        <meta name="viewport" content="width=1920,height=1080,initial-scale=1" />
+        <link rel="shortcut icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAAMklEQVR4nGLZx3CCgZaAiaamj1owasGoBaMWjFowasGoBaMWjFowasGoBVQEgAAAAP//K1YByejktyMAAAAASUVORK5CYII=" />
+        <style type="text/css">
+            html,body{width:1920px;height:1080px;background-color:rgba(255,255,255,1.0);}
+        </style>
+        <script type="text/javascript">
+            // ok
+        console.log("ok canar!");
+        // async load
+        (function() {
+         var async_load = function() {
+            g.init();
+            }
+         window.addEventListener("load", async_load, false);
+         })();
+// game
+var g = {
+    "init": function() {
+        console.log("game go");
+    }
+}
+// pieces enum (hunns)
+var PIECES = {
+    "RED": {"value": 0, "name": "red"},
+    "BLACK": {"value": 1, "name": "black"},
+    "WHITE": {"value": 2, "name": "white"}
+}
+// pieces
+var RED = 0x00;
+var WHITE = 0x01
+var BLACK = 0x10;
+// bitboard (11x11)
+// 121 bits total for board
+// can use uint32[4]
+// 0x88 representation for square boards
+// 0x88 to represent 8x8
+// 0xBB to represent 11x11?
+// 0xF2 = 242 (11*11*2)
+// binary data
+// dataview with consistent endianness
+
+        </script>
+    </head>
+    <body id="alpha">
+    </body>
+</html>
+ 
