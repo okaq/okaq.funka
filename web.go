@@ -14,7 +14,8 @@ const (
     // PATH = "index.html"
     // PATH = "anaova.html"
     // PATH = "ban.html"
-    PATH = "canar.html"
+    // PATH = "canar.html"
+    PATH = "duji.html"
 )
 
 var (

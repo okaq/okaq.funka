@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head id="zeta">
+        <title>okaq</title>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+        <meta name="viewport" content="width=1920,height=1080,initial-scale=1" />
+        <link rel="shortcut icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAAMklEQVR4nGLZx3CCgZaAiaamj1owasGoBaMWjFowasGoBaMWjFowasGoBVQEgAAAAP//K1YByejktyMAAAAASUVORK5CYII=" />
+        <style type="text/css">
+            html,body{width:1920px;height:1080px;background-color:rgba(255,255,255,1.0);}
+        </style>
+        <script type="text/javascript">
+            // ok
+        console.log("ok duji!");
+        // async load
+        (function() {
+         var async_load = function() {
+            game.init();
+            }
+         window.addEventListener("load", async_load, false);
+         })();
+// game
+var game = {
+    "init": function() {
+        console.log("game go");
+        dom.init();
+    }
+}
+// DOM
+var dom = {
+    "init": function() {
+        dom.alpha = document.getElementById("alpha");
+        dom.board = {};
+        dom.board.can = document.createElement("canvas");
+        dom.ui = {}
+    }
+}
+// color
+var col = {
+}
+        </script>
+    </head>
+    <body id="alpha">
+    </body>
+</html>
