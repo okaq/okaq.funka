@@ -22,6 +22,7 @@
 var g = {
     "init": function() {
         console.log("game go");
+        bin.test();
     }
 }
 // pieces enum (hunns)
@@ -43,7 +44,17 @@ var BLACK = 0x10;
 // 0xF2 = 242 (11*11*2)
 // binary data
 // dataview with consistent endianness
-
+// binary data
+var bin = {
+    "test": function() {
+        bin.ab = new ArrayBuffer(7);
+        console.trace(bin.ab);
+        bin.dv = new DataView(bin.ab);
+        bin.dv.setUint16(0, 0xf0); // (0xf0 = 240)
+        console.trace(bin.dv);
+        console.log(bin.dv.getUint16(0, true)); // option littleEndian (0xf000 = 61440)
+    }
+}
         </script>
     </head>
     <body id="alpha">
