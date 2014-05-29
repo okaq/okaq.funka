@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head id="zeta">
+        <title>okaq</title>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+        <meta name="viewport" content="width=1920,height=1080,initial-scale=1" />
+        <link rel="shortcut icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAAMklEQVR4nGK5u/EFAy0BE01NH7Vg1IJRC0YtGLVg1IJRC0YtGLVg1IJRC6gIAAEAAP//iBoCuYxnqT8AAAAASUVORK5CYII=" />
+        <style type="text/css">
+            html,body{width:1920px;height:1080px;background-color:rgba(32,8,16,1.0);}
+        </style>
+        <script type="text/javascript">
+            // ok
+            console.log("okaq toru guka!");
+            // async load
+            (function() {
+                window.okaq = {};
+                okaq.a = {
+                    "load": function() {
+                        console.log("okaq a load: ");
+                        console.log(okaq.a);
+                        okaq.g.init();
+                    }
+                }
+                window.addEventListener("load", okaq.a.load, false);
+            })();
+            // game
+            okaq.g = {
+                "init": function() {
+                    console.log("okaq g init: ");
+                    console.log(okaq.g);
+                    console.log(okaq);
+                    console.log(window);
+                    okaq.d.init();
+                    okaq.c.init();
+                    okaq.g.prop();
+                    okaq.r.clear();
+                    okaq.r.render(okaq.g.data);
+                },
+                "prop": function() {
+                    console.log("okaq g prop");
+                    okaq.g.xc = (okaq.d.beta.can.width / 2) >>> 0;
+                    okaq.g.yc = (okaq.d.beta.can.height / 2) >>> 0;
+                    okaq.g.cw = false;
+                    okaq.g.num = 128; // obtain from: canvas dimension / arc width
+                    okaq.g.data = [];
+                    for (var i = 0; i < okaq.g.num; i++) {
+                        var a0 = new arc();
+                        a0.x0 = okaq.g.xc;
+                        a0.y0 = okaq.g.yc;
+                        okaq.g.data.push(a0);
+                    }
+                }
+            }
+// arc
+var arc = function() {
+    this.x0 = 0;
+    this.y0 = 0;
+    this.r0 = (Math.random() * 990) >>> 0;
+    this.sa = 0;
+    this.ea = Math.PI * 2;
+    this.cw = false;
+}
+// dom
+okaq.d = {
+    "init": function() {
+        okaq.d.alpha = document.getElementById("alpha");
+        okaq.d.beta = {};
+        okaq.d.beta.can = document.createElement("canvas");
+        okaq.d.beta.con = okaq.d.beta.can.getContext("2d");
+        okaq.d.beta.can.width = 1920;
+        okaq.d.beta.can.height = 1080;
+        okaq.d.beta.can.style.position = "absolute";
+        okaq.d.beta.can.style.top = "0px";
+        okaq.d.beta.can.style.left = "0px";
+        okaq.d.alpha.appendChild(okaq.d.beta.can);
+    },
+    "clear": function() {
+        okaq.d.beta.can.width = okaq.d.beta.can.width;
+    }
+}
+// render
+okaq.r = {
+    "render": function(d0) {
+        // render data
+        for (var i = 0; i < d0.length; i++) {
+            okaq.c.rand();
+            okaq.d.beta.con.strokeStyle = okaq.c.css();
+            okaq.d.beta.con.beginPath();
+            okaq.d.beta.con.arc(d0[i].x0, d0[i].y0, d0[i].r0, d0[i].sa, d0[i].ea, d0[i].cw);
+            okaq.d.beta.con.strokeWidth = 4;
+            okaq.d.beta.con.stroke();
+            // okaq.d.beta.con.endPath();
+        }
+    },
+    "clear": function() {
+        okaq.d.clear();
+        okaq.c.rand();
+        okaq.d.beta.con.fillStyle = okaq.c.css();
+        okaq.d.beta.con.fillRect(0,0,okaq.d.beta.can.width,okaq.d.beta.can.height);
+    }
+}
+// color
+okaq.c = {
+    "init": function() {
+        okaq.c.data = new Uint8Array(4);
+        okaq.c.rand();
+    },
+    "rand": function() {
+        for (var i = 0; i < okaq.c.data.length; i++) {
+            okaq.c.data[i] = okaq.c.rb();
+        }
+    },
+    "rb": function() {
+        return ((Math.random() * 255) >>> 0);
+    },
+    "css": function() {
+        var s0 = "rgba(";
+        for (var i = 0; i < 3; i++) {
+           s0 += okaq.c.data[i].toString();
+           s0 += ",";
+        }
+        s0 += (okaq.c.data[3] / 255.0).toString();
+        s0 += ")";
+                                                    
+        return s0;
+    }
+}
+        </script>
+    </head>
+    <body id="alpha">
+    </body>
+</html>
+<!--
+
+    concentric random arcs
+    fullscreen okaq (1920x1080)
+    missing random subarc
+    "making of gravity"
+
+    maze gen wilsons algo
+
+-->
