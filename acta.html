@@ -26,7 +26,7 @@ var a = {
         a.start = window.performance.now();
 
         // subsystems
-        a.subs = [dom,lay,bmp];
+        a.subs = [dom,lay,sce,bmp];
         a.subs.forEach(function(el){el.init();});
 
         // cycle
@@ -80,11 +80,40 @@ var a = {
         return r0;
     }
 }
+// scene
+var sce = {
+    "init": function() {
+        sce.a = [];
+        for (var i = 0; i < lay.a.length; i++) {
+            sce.a[i] = [];
+            sce.a[i][0] = dom.canvas(lay.a[i][0]);
+            dom.add(sce.a[i][0]);
+        }
+    }
+}
 // layout
 var lay = {
     "init": function() {
         lay.w = 1920;
         lay.h = 1080;
+        // side margins, 4 char blocks, and equal inner block margins, pixel margins
+        lay.smx = 0;
+        lay.bmx = 0;
+        lay.pmx = 0;
+        // block size
+        lay.bx = ((lay.w - (2 * lay.smx)) / 4) >>> 0;
+        // pixel size
+        lay.px = ((lay.bx - (2 * lay.bmx)) / 32) >>> 0;
+        console.log(lay);
+        // data
+        lay.a = [];
+        for (var i = 0; i < 4; i++) {
+            lay.a[i] = [];
+            var x0 = (i * lay.bx) >>> 0;
+            x0 = x0 + lay.smx;
+            lay.a[i][0] = [lay.bx, lay.h, x0, 0]; // bkgd
+            lay.a[i][1] = []; // pixel grid
+        }
     }
 }
 // dom
