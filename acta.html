@@ -50,7 +50,7 @@ var a = {
     },
     "ren": function() {
         // clear and draw bkgd and data
-        // ren.clear();
+        ren.clear();
         ren.bkgd();
         // ren.data();
     },
@@ -129,6 +129,12 @@ var lay = {
             x0 = x0 + lay.smx;
             lay.a[i][0] = [lay.bx, lay.h, x0, 0]; // bkgd
             lay.a[i][1] = []; // pixel grid
+            for (var j = 0; j < 1024; j++) {
+                var x0 = j % 32;
+                var y0 = (j / 32) >>> 0;
+                var x1 = (x0 * lay.px) >>> 0;
+                var y1 = (y0 * lay.px) >>> 0;
+            }
         }
     }
 }
@@ -171,6 +177,11 @@ var ren = {
         }
     },
     "clear": function() {
+        var c0 = rgba.css([255,255,255,1.0);
+        for (var i = 0; i < sce.a.length; i++) {
+            sce.a[i][0].con.fillStyle = c0;
+            sce.a[i][0].con.fillRect(0,0,sce.a[i][0].can.width,sce.a[i][0].can.height);
+        }
     },
     "data": function() {
     }
