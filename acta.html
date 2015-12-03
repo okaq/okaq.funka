@@ -29,9 +29,17 @@ var a = {
         a.subs = [dom,lay,sce,bmp];
         a.subs.forEach(function(el){el.init();});
 
-        // cycle
+        // data
         a.tick = 0;
         a.data = a.shuf();
+
+        // first render
+        // ren.clear();
+        // ren.bkgd();
+        // ren.data();
+        a.ren();
+
+        // cycle
         a.id = window.setInterval(a.cyc, 1000);
 
         // stats
@@ -40,12 +48,20 @@ var a = {
         console.log("total load time: " + total + "ms.");
  
     },
+    "ren": function() {
+        // clear and draw bkgd and data
+        // ren.clear();
+        ren.bkgd();
+        // ren.data();
+    },
     "cyc": function() {
         // random bit filp
         var f0 = (Math.random() * 4) >>> 0;
         a.data[f0] = (a.data[f0] == 1) ? 0 : 1;
         console.log(a.data);
         a.tick = a.tick + 1;
+        // render
+        a.ren();
         // check goal
         if (a.goal()) {
             window.clearInterval(a.id);
@@ -138,6 +154,25 @@ var dom = {
     },
     "remove": function(c0) {
         dom.alpha.removeChild(c0.can);
+    }
+}
+// render
+var ren = {
+    "bkgd": function() {
+        for (var i = 0; i < sce.a.length; i++) {
+            // data value - 0 = black, 1 = white
+            // bkgd is flip of data value
+            if (a.data[i] == 1) {
+                sce.a[i][0].con.fillStyle = rgba.css([0,0,0,1.0]);
+            } else {
+                sce.a[i][0].con.fillStyle = rgba.css([255,255,255,1.0]);
+            }
+            sce.a[i][0].con.fillRect(0,0,sce.a[i][0].can.width,sce.a[i][0].can.height);
+        }
+    },
+    "clear": function() {
+    },
+    "data": function() {
     }
 }
 // bitmap
