@@ -32,6 +32,7 @@ var a = {
         // data
         a.tick = 0;
         a.data = a.shuf();
+        a.text = ["o","k","a","q"];
 
         // first render
         // ren.clear();
@@ -52,7 +53,7 @@ var a = {
         // clear and draw bkgd and data
         ren.clear();
         ren.bkgd();
-        // ren.data();
+        ren.data();
     },
     "cyc": function() {
         // random bit filp
@@ -99,11 +100,20 @@ var a = {
 // scene
 var sce = {
     "init": function() {
+        // bkgd
         sce.a = [];
         for (var i = 0; i < lay.a.length; i++) {
             sce.a[i] = [];
             sce.a[i][0] = dom.canvas(lay.a[i][0]);
             dom.add(sce.a[i][0]);
+        }
+        // pixels
+        for (var i = 0; i < lay.a.length; i++) {
+            sce.a[i][1] = [];
+            for (var j = 0; j < lay.a[i][1].length; j++) {
+                sce.a[i][1][j] = dom.canvas(lay.a[i][1][j]);
+                dom.add(sce.a[i][1][j]);
+            }
         }
     }
 }
@@ -120,6 +130,7 @@ var lay = {
         lay.bx = ((lay.w - (2 * lay.smx)) / 4) >>> 0;
         // pixel size
         lay.px = ((lay.bx - (2 * lay.bmx)) / 32) >>> 0;
+        lay.pmy = ((lay.h - (lay.px * 32)) / 2) >>> 0;
         console.log(lay);
         // data
         lay.a = [];
@@ -127,13 +138,17 @@ var lay = {
             lay.a[i] = [];
             var x0 = (i * lay.bx) >>> 0;
             x0 = x0 + lay.smx;
+            var y0 = lay.pmy;
             lay.a[i][0] = [lay.bx, lay.h, x0, 0]; // bkgd
             lay.a[i][1] = []; // pixel grid
             for (var j = 0; j < 1024; j++) {
-                var x0 = j % 32;
-                var y0 = (j / 32) >>> 0;
-                var x1 = (x0 * lay.px) >>> 0;
-                var y1 = (y0 * lay.px) >>> 0;
+                var x1 = j % 32;
+                var y1 = (j / 32) >>> 0;
+                var x2 = (x1 * lay.px) >>> 0;
+                var y2 = (y1 * lay.px) >>> 0;
+                var x3 = (x2 + x0) >>> 0;
+                var y3 = (y2 + y0) >>> 0;
+                lay.a[i][1][j] = [lay.px, lay.px, x3, y3];
             }
         }
     }
@@ -177,13 +192,26 @@ var ren = {
         }
     },
     "clear": function() {
-        var c0 = rgba.css([255,255,255,1.0);
+        var c0 = rgba.css([255,255,255,1.0]);
         for (var i = 0; i < sce.a.length; i++) {
             sce.a[i][0].con.fillStyle = c0;
             sce.a[i][0].con.fillRect(0,0,sce.a[i][0].can.width,sce.a[i][0].can.height);
         }
     },
     "data": function() {
+        for (var i = 0; i < sce.a.length; i++) {
+            var bmp0 = bmp.a[a.text[i]];
+            var c0 = rgba.css([0,0,0,1.0]);
+            if (a.data[i] == 1) {
+                var c0 = rgba.css([255,255,255,1.0]);
+            } 
+            for (var j = 0; j < sce.a[i][1].length; j++) {
+                if (bmp0[j] == 1) {
+                    sce.a[i][1][j].con.fillStyle = c0;
+                    sce.a[i][1][j].con.fillRect(0,0,lay.px,lay.px);
+                }
+            }
+        }
     }
 }
 // bitmap
